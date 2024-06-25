@@ -1,5 +1,5 @@
 import { TaskService } from './task.service';
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { TaskDto } from './task.dto';
 
 @Controller('task') // Aqui estamos definindo nosso endpoint /task
@@ -20,4 +20,9 @@ export class TaskController {
         // : TaskDto é pra definirmos que o tipo de retorno será TaskDto
         return this.TaskService.findById(id)
     }   
+
+    @Put()
+    update(@Body() task: TaskDto){
+        this.TaskService.update(task)
+    }
 }
