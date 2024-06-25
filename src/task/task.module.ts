@@ -4,6 +4,6 @@ import { TaskService } from './task.service';
 
 @Module({
     controllers: [TaskController],
-    providers: [TaskService]  // foi importado no taskService e não no task module
+    providers: [TaskService]
 })
 export class TaskModule {}
