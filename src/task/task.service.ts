@@ -23,7 +23,6 @@ export class TaskService {
 
     findAll(params: FindAllParamaters): TaskDto[]{
         
-        // filtro cumulativo, se tiver 1 ou mais parametros, pegaremos todos eles
         return this.tasks.filter(t => {
             let match = true;
 
@@ -54,7 +53,7 @@ export class TaskService {
         let taskIndex = this.tasks.findIndex(t => t.id === id) 
 
         if (taskIndex >= 0){
-            this.tasks.slice(taskIndex, 1)  // vou remover 1 item do index[taskIndex]
+            this.tasks.slice(taskIndex, 1)
             return
         }
 
