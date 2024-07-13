@@ -13,9 +13,9 @@ export class AuthGuard implements CanActivate {
   ) {
     this.jwtSecret = this.configService.get<string>('JWT_SECRET');
   }
-  async canActivate(context: ExecutionContext): Promise<boolean> {
+  async canActivate(context: ExecutionContext): Promise<boolean> {  // por se tratar de uma promise, usaremos async
     
-    const request = context.switchToHttp().getRequest();
+    const request = context.switchToHttp().getRequest();  // ter acesso as requisições do express
     
     const token = this.extractTokenFromHeader(request);
     
@@ -32,10 +32,11 @@ export class AuthGuard implements CanActivate {
       throw new UnauthorizedException();
     }
     
-    return true;
+    return true;  // se retornar true é pq temos nosso usuário autenticado
   }
   private extractTokenFromHeader(request: Request): string | undefined {
     const [type, token] = request.headers.authorization?.split(' ') ?? [];
     return type === 'Bearer' ? token : undefined;
+    // estamos extraindo o token da requisição e verificando se o type é do tipo Bearer. Se for retorna token, do contrário retorna undefined
   }
 }
