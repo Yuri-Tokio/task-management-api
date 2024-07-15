@@ -19,7 +19,12 @@ export class TaskController {
         return this.TaskService.findById(id)
     }   
 
-    @Put()
+    @Get()       
+    findAll(@Query() params: FindAllParamaters): TaskDto[]{
+        return this.TaskService.findAll(params)
+    }
+    
+    @Put('/:id')
     update(@Body() task: TaskDto){
         this.TaskService.update(task)
     }
@@ -27,10 +32,5 @@ export class TaskController {
     @Delete('/:id')
     remove(@Param('id') id: string){
         return this.TaskService.remove(id)
-    }
-
-    @Get()       
-    findAll(@Query() params: FindAllParamaters): TaskDto[]{
-        return this.TaskService.findAll(params)
     }
 }
