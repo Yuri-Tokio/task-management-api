@@ -17,8 +17,8 @@ export class AuthService {
         this.jwtExpirationTimeInSeconds = +this.ConfigService.get<number>('JWT_EXPIRATION_TIME');
     }
 
-    sigIn(username: string, password: string): AuthResponseDto {
-        const foundUser = this.UsersService.findByUserName(username)
+    async sigIn(username: string, password: string): Promise<AuthResponseDto> {
+        const foundUser = await this.UsersService.findByUserName(username)
 
         if (!foundUser || !bcryptCompareSync(password, foundUser.password)) { // vai receber a senha e comparar com a do usuário
             throw new UnauthorizedException()

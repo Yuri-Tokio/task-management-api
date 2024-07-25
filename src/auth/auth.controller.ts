@@ -9,10 +9,10 @@ export class AuthController {
 
     @HttpCode(HttpStatus.OK)
     @Post('login')
-    sigIn(
+    async sigIn(
         @Body('username') username : string,
         @Body('password') password: string
-    ): AuthResponseDto {    // Diz que o retorno do método sigIn é do tipo AuthResponseDto q será criado baseado no auth.dto.ts
-        return this.AuthService.sigIn(username, password)
+    ): Promise<AuthResponseDto> {    // Diz que o retorno do método sigIn é do tipo AuthResponseDto q será criado baseado no auth.dto.ts
+        return await this.AuthService.sigIn(username, password)
     }
 }
