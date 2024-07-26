@@ -4,9 +4,9 @@ import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 @Injectable()
 export class AuthGuard implements CanActivate {
-  
+
   private jwtSecret: string;
-  
+
   constructor(
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService
@@ -14,15 +14,15 @@ export class AuthGuard implements CanActivate {
     this.jwtSecret = this.configService.get<string>('JWT_SECRET');
   }
   async canActivate(context: ExecutionContext): Promise<boolean> {  // por se tratar de uma promise, usaremos async
-    
+
     const request = context.switchToHttp().getRequest();  // ter acesso as requisições do express
-    
+
     const token = this.extractTokenFromHeader(request);
-    
+
     if (!token) {
       throw new UnauthorizedException();
     }
-    
+
     try {
       const payload = await this.jwtService.verifyAsync(token, {
         secret: this.jwtSecret,
@@ -31,7 +31,7 @@ export class AuthGuard implements CanActivate {
     } catch {
       throw new UnauthorizedException();
     }
-    
+
     return true;  // se retornar true é pq temos nosso usuário autenticado
   }
   private extractTokenFromHeader(request: Request): string | undefined {

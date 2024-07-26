@@ -8,8 +8,8 @@ import { ConfigModule } from '@nestjs/config';
 import { DbModule } from './db/db.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true}), TaskModule, UsersModule, AuthModule, DbModule],
+  imports: [ConfigModule.forRoot({ isGlobal: true }), TaskModule, UsersModule, AuthModule, DbModule],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

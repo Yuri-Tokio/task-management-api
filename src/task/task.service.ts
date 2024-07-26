@@ -10,12 +10,12 @@ export class TaskService {
 
     constructor(
         @InjectRepository(TaskEntity) private readonly taskRepository: Repository<TaskEntity>
-    ) {}
+    ) { }
 
     private tasks: TaskDto[] = []
 
     async create(task: TaskDto) {
-        
+
         // criar uma taskToSave, conversão do DTO para o banco de dados.
         const taskToSave: TaskEntity = {
             title: task.title,
@@ -47,12 +47,12 @@ export class TaskService {
         const searchParams: FindOptionsWhere<TaskEntity> = {}
 
 
-        if (params.title){
+        if (params.title) {
             searchParams.title = Like(`%${params.title}%`)
         }
-        
-        
-        if (params.status){
+
+
+        if (params.status) {
             searchParams.status = Like(`%${params.status}%`)
         }
 
@@ -110,5 +110,5 @@ export class TaskService {
             status: taskDto.status.toString()
         }
     }
-    
+
 }

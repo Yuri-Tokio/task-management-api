@@ -27,7 +27,7 @@ export class AuthService {
         // Criação do payload para injetar no token do jwt
         // o payload possui os dados q estamos passando e os dados da nossa autenticação
 
-        const payload = { sub: foundUser.id, username: foundUser.username}  // recomendado pelo jwt usar id como 'sub'
+        const payload = { sub: foundUser.id, username: foundUser.username }  // recomendado pelo jwt usar id como 'sub'
 
         const token = this.jwtService.sign(payload)
 
